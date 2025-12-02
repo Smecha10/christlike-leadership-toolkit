@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christlike Leadership Development Toolkit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 60px 20px 30px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            color: #1e3c72;
+            font-size: 3em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            color: #2a5298;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        
+        .overview {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .overview h2 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+        
+        .nav-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+        
+        .nav-pill {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid #2a5298;
+            font-weight: 600;
+            color: #1e3c72;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-size: 0.95em;
+        }
+        
+        .nav-pill:hover {
+            background: #2a5298;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-pill.active {
+            background: #1e3c72;
+            color: white;
+        }
+        
+        .principle-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            display: none;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .principle-card.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .principle-card h2 {
+            color: #1e3c72;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 4px solid #2a5298;
+        }
+        
+        .principle-card h3 {
+            color: #2a5298;
+            font-size: 1.6em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        .principle-card p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #444;
+        }
+        
+        .principle-card ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .principle-card li {
+            margin-bottom: 12px;
+            font-size: 1.05em;
+            color: #555;
+        }
+        
+        .scripture-ref {
+            background: #e3f2fd;
+            padding: 20px;
+            border-left: 5px solid #2a5298;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-style: italic;
+        }
+        
+        .activity-box {
+            background: #f0f9ff;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px solid #2a5298;
+        }
+        
+        .discussion-box {
+            background: #fef3c7;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px solid #d97706;
+        }
+        
+        .gospel-section {
+            background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .gospel-section h3 {
+            color: #6b21a8;
+        }
+
+        /* Instructor-only gospel content wrapper */
+        .instructor-only {
+            display: none;
+        }
+
+        /* Participant response textareas */
+        .response-box {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid #2a5298;
+            font-size: 1em;
+            margin: 10px 0 20px;
+            resize: vertical;
+        }
+
+        /* When body has instructor-view, show gospel content and soften activities/discussion */
+        .instructor-view .instructor-only {
+            display: block;
+        }
+
+        .instructor-view .discussion-box,
+        .instructor-view .activity-box {
+            opacity: 0.4;
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        footer h3 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+        }
+        
+        .works-cited {
+            text-align: left;
+            max-width: 800px;
+            margin: 20px auto;
+            font-size: 0.95em;
+            color: #555;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .subtitle {
+                font-size: 1.2em;
+            }
+            
+            .nav-pill {
+                padding: 8px 18px;
+                font-size: 0.85em;
+            }
+            
+            .principle-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CHRISTLIKE LEADERSHIP</h1>
+            <div class="subtitle">Development Toolkit</div>
+            <p style="color: #555; font-size: 1.1em;">Principles for Leaders at Every Level</p>
+
+            <!-- Mode toggle: Participant vs Instructor -->
+            <div style="margin: 20px 0 0; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                <button class="nav-pill active" id="mode-participant" onclick="setMode('participant')">Participant View</button>
+                <button class="nav-pill" id="mode-instructor" onclick="setMode('instructor')">Instructor (Gospel) View</button>
+            </div>
+        </header>
+        
+        <div class="overview">
+            <h2>Overview</h2>
+            <p>This toolkit provides research-backed leadership principles that can be applied in any organizational setting. Each principle includes practical applications, discussion prompts, and workshop activities designed to develop stronger, more effective leaders.</p>
+            <p>The framework is built on timeless principles of human development, trust-building, and ethical leadership that transcend industry and context.</p>
+        </div>
+        
+        <div class="nav-pills">
+            <div class="nav-pill active" onclick="showPrinciple(1, event)">Principle 1</div>
+            <div class="nav-pill" onclick="showPrinciple(2, event)">Principle 2</div>
+            <div class="nav-pill" onclick="showPrinciple(3, event)">Principle 3</div>
+            <div class="nav-pill" onclick="showPrinciple(4, event)">Principle 4</div>
+            <div class="nav-pill" onclick="showPrinciple(5, event)">Principle 5</div>
+            <div class="nav-pill" onclick="showPrinciple(6, event)">Principle 6</div>
+            <div class="nav-pill" onclick="showPrinciple(7, event)">Principle 7</div>
+        </div>
+        
+        <!-- PRINCIPLE 1 -->
+        <div class="principle-card active" id="principle1">
+            <h2>PRINCIPLE 1: SERVE FIRST, LEAD SECOND</h2>
+            
+            <h3>Core Concept</h3>
+            <p>True leadership begins with genuine service to others. Leaders who prioritize the growth and well-being of their team members build trust, loyalty, and sustainable performance. This approach shifts the focus from positional authority to relational influence.</p>
+            
+            <h3>Research Foundation</h3>
+            <p>Servant leadership theory (Greenleaf, 1970) demonstrates that leaders who serve first create psychologically safe environments where team members feel valued, heard, and empowered to contribute their best work. Organizations with servant leaders report higher employee engagement, lower turnover, and stronger innovation.</p>
+            
+            <h3>Practical Applications</h3>
+            <ul>
+                <li>Ask "How can I help you succeed?" in one-on-one meetings</li>
+                <li>Remove obstacles that prevent team members from doing their best work</li>
+                <li>Celebrate team successes publicly while addressing failures privately</li>
+                <li>Invest time in understanding individual career goals and development needs</li>
+                <li>Make decisions that prioritize long-term team health over short-term personal gains</li>
+            </ul>
+            
+            <div class="activity-box">
+                <h3>Workshop Activity</h3>
+                <p>Pair participants and have them identify one specific obstacle each person faces in their role. Partners then brainstorm three concrete actions a leader could take to remove that obstacle. Debrief by discussing what it feels like to be served versus managed.</p>
+            </div>
+            
+            <div class="discussion-box">
+                <h3>Discussion Prompts</h3>
+                <ul>
+                    <li>When have you experienced a leader who genuinely served you? What did that look like?</li>
+                    <li>What prevents leaders from adopting a service mindset?</li>
+                    <li>How can you distinguish between serving and enabling?</li>
+                </ul>
+            </div>
+
+            <textarea class="response-box" data-response-key="principle1" placeholder="Type your reflections or answers for Principle 1 here..."></textarea>
+            
+            <div class="gospel-section instructor-only">
+                <h3>Gospel Foundation</h3>
+                <p>Jesus Christ is the ultimate servant leader. His ministry demonstrated service through healing, teaching, lifting the marginalized, and ultimately giving His life for all humanity.</p>
+                
+                <div class="scripture-ref">
+                    <strong>Scripture References:</strong>
+                    <ul>
+                        <li>John 13:1–17 (washing the disciples' feet)</li>
+                        <li>Mark 10:42–45 (the Son of Man came to serve)</li>
+                        <li>Mosiah 2:17 (service to others as service to God)</li>
+                    </ul>
+                </div>
+                
+                <p><strong>Reflection for Instructors:</strong> How does Christ's example of service challenge conventional ideas about power and authority in your organization or classroom?</p>
+            </div>
+        </div>
+        
+        <!-- PRINCIPLE 2 -->
+        <div class="principle-card" id="principle2">
+            <h2>PRINCIPLE 2: SEE INDIVIDUALS, NOT JUST OUTCOMES</h2>
+            
+            <h3>Core Concept</h3>
+            <p>Effective leaders recognize that sustainable results come from valuing people as whole individuals rather than treating them as means to an end. This principle emphasizes the importance of seeing each team member's unique strengths, challenges, and potential.</p>
+            
+            <h3>Research Foundation</h3>
+            <p>Humanistic management research shows that when leaders demonstrate genuine interest in individuals, trust increases and performance improves. Studies on psychological safety confirm that people perform better when they feel seen, known, and valued beyond their productivity metrics.</p>
+            
+            <h3>Practical Applications</h3>
+            <ul>
+                <li>Learn and remember personal details about team members (family, interests, goals)</li>
+                <li>Check in on well-being before discussing task updates</li>
+                <li>Adjust leadership style to fit individual needs rather than applying one-size-fits-all approaches</li>
+                <li>Create space for people to share struggles without fear of judgment</li>
+                <li>Recognize contributions beyond measurable outputs</li>
+            </ul>
+            
+            <div class="activity-box">
+                <h3>Workshop Activity</h3>
+                <p>Have participants create a simple profile of one team member that includes: their preferred working style, current life challenges, career aspirations, and one way the leader could better support them. Discuss how this knowledge changes leadership decisions.</p>
+            </div>
+            
+            <div class="discussion-box">
+                <h3>Discussion Prompts</h3>
+                <ul>
+                    <li>What gets in the way of seeing people as individuals in fast-paced work environments?</li>
+                    <li>How do you balance caring for individuals with holding them accountable?</li>
+                    <li>When has someone's recognition of your individual needs made you more effective?</li>
+                </ul>
+            </div>
+
+            <textarea class="response-box" data-response-key="principle2" placeholder="Type your reflections or answers for Principle 2 here..."></textarea>
+            
+            <div class="gospel-section instructor-only">
+                <h3>Gospel Foundation</h3>
+                <p>Christ saw and valued each person as an individual child of God, ministering “one by one” and recognizing unique circumstances and potential. The parable of the lost sheep shows that every individual matters deeply to God.</p>
+                
+                <div class="scripture-ref">
+                    <strong>Scripture References:</strong>
+                    <ul>
+                        <li>3 Nephi 11:15; 17:21 (ministering one by one)</li>
+                        <li>Luke 15:4–7 (parable of the lost sheep)</li>
+                        <li>1 Samuel 16:7 (the Lord looks on the heart)</li>
+                    </ul>
+                </div>
+                
+                <p><strong>Reflection for Instructors:</strong> How did Christ balance caring for individuals with accomplishing His larger mission?</p>
+            </div>
+        </div>
+        
+        <!-- PRINCIPLE 3 -->
+        <div class="principle-card" id="principle3">
+            <h2>PRINCIPLE 3: LEAD WITH HUMILITY</h2>
+            
+            <h3>Core Concept</h3>
+            <p>Humble leaders create environments where learning, innovation, and honest feedback thrive. Humility in leadership means acknowledging limitations, valuing diverse perspectives, and prioritizing team success over personal credit.</p>
+            
+            <h3>Research Foundation</h3>
+            <p>Research on Level 5 Leadership suggests that the most effective leaders combine personal humility with strong professional will. Humble leaders build cultures where mistakes become learning opportunities instead of threats.</p>
+            
+            <h3>Practical Applications</h3>
+            <ul>
+                <li>Admit when you don't have all the answers</li>
+                <li>Ask for feedback on your leadership and act on it</li>
+                <li>Share credit generously and accept responsibility when things go wrong</li>
+                <li>Seek input from people at all levels before making decisions</li>
+                <li>Model continuous learning by acknowledging areas where you're growing</li>
+            </ul>
+            
+            <div class="activity-box">
+                <h3>Workshop Activity</h3>
+                <p>Have leaders share one area where they're currently struggling or learning. Discuss how vulnerability from leaders creates permission for others to be honest about their own growth. Practice asking for feedback using the prompt: “What's one thing I could do differently to support you better?”</p>
+            </div>
+            
+            <div class="discussion-box">
+                <h3>Discussion Prompts</h3>
+                <ul>
+                    <li>How do you distinguish between humility and lack of confidence?</li>
+                    <li>What makes it difficult to admit mistakes in leadership roles?</li>
+                    <li>When have you seen humility strengthen rather than weaken a leader's influence?</li>
+                </ul>
+            </div>
+
+            <textarea class="response-box" data-response-key="principle3" placeholder="Type your reflections or answers for Principle 3 here..."></textarea>
+            
+            <div class="gospel-section instructor-only">
+                <h3>Gospel Foundation</h3>
+                <p>Christ exemplified perfect humility, being “meek and lowly in heart,” submitting His will to the Father, and refusing to seek personal glory. His humility opened space for others to grow in faith and responsibility.</p>
+                
+                <div class="scripture-ref">
+                    <strong>Scripture References:</strong>
+                    <ul>
+                        <li>Matthew 11:28–30 (meek and lowly in heart)</li>
+                        <li>Philippians 2:5–8 (Christ willingly humbled Himself)</li>
+                        <li>3 Nephi 11:11 (submitting to the Father's will)</li>
+                    </ul>
+                </div>
+                
+                <p><strong>Reflection for Instructors:</strong> How does Christlike humility make leadership more powerful instead of weaker?</p>
+            </div>
+        </div>
+        
+        <!-- PRINCIPLE 4 -->
+        <div class="principle-card" id="principle4">
+            <h2>PRINCIPLE 4: EMPOWER THROUGH TRUST</h2>
+            
+            <h3>Core Concept</h3>
+            <p>Great leaders multiply their impact by empowering others to act with autonomy and accountability. Trust-based leadership means giving people meaningful responsibility, supporting their decisions, and allowing space for growth through experience.</p>
+            
+            <h3>Research Foundation</h3>
+            <p>Self-Determination Theory highlights autonomy as a core human need. When leaders trust people with real authority, intrinsic motivation rises, creativity flourishes, and ownership deepens, while micromanagement undermines engagement.</p>
+            
+            <h3>Practical Applications</h3>
+            <ul>
+                <li>Delegate outcomes, not just tasks (“achieve this result” vs. “follow these steps”)</li>
+                <li>Allow people to make decisions within clear boundaries</li>
+                <li>Support team members' choices even when you might have done it differently</li>
+                <li>Create clear expectations, then step back and trust the process</li>
+                <li>Frame mistakes as learning opportunities rather than failures</li>
+            </ul>
+            
+            <div class="activity-box">
+                <h3>Workshop Activity</h3>
+                <p>Identify one responsibility currently held by the leader that could be delegated to a team member. Map out: (1) What would the person need to succeed? (2) What boundaries should be set? (3) How will you resist the urge to micromanage? Practice the delegation conversation in pairs.</p>
+            </div>
+            
+            <div class="discussion-box">
+                <h3>Discussion Prompts</h3>
+                <ul>
+                    <li>What makes it hard to delegate real authority?</li>
+                    <li>How do you balance trust with accountability?</li>
+                    <li>When has someone's trust in you revealed capabilities you didn't know you had?</li>
+                </ul>
+            </div>
+
+            <textarea class="response-box" data-response-key="principle4" placeholder="Type your reflections or answers for Principle 4 here..."></textarea>
+            
+            <div class="gospel-section instructor-only">
+                <h3>Gospel Foundation</h3>
+                <p>Christ entrusted His disciples with preaching, healing, and leading, even though they were imperfect. He continued to empower them after His Resurrection, allowing them to learn and grow through real responsibility.</p>
+                
+                <div class="scripture-ref">
+                    <strong>Scripture References:</strong>
+                    <ul>
+                        <li>Matthew 10:1–15 (sending forth the Twelve)</li>
+                        <li>John 14:12 (promising “greater works”)</li>
+                        <li>Doctrine and Covenants 64:33 (the Lord’s pattern of accomplishing His work)</li>
+                    </ul>
+                </div>
+                
+                <p><strong>Reflection for Instructors:</strong> What did Christ’s trust in imperfect disciples teach them about their divine potential?</p>
+            </div>
+        </div>
+        
+        <!-- PRINCIPLE 5 -->
+        <div class="principle-card" id="principle5">
+            <h2>PRINCIPLE 5: DEVELOP PEOPLE, NOT JUST PERFORMANCE</h2>
+            
+            <h3>Core Concept</h3>
+            <p>Leadership is fundamentally about growing people, not just extracting productivity. Long-term success depends on investing in the capabilities, character, and potential of team members, even when that requires short-term sacrifice.</p>
+            
+            <h3>Research Foundation</h3>
+            <p>Transformational leadership research shows that leaders who invest in development build higher-performing, more adaptable teams. Organizations with strong developmental cultures attract and retain talent and strengthen future leadership capacity.</p>
+            
+            <h3>Practical Applications</h3>
+            <ul>
+                <li>Regularly discuss career growth and development goals, not just current projects</li>
+                <li>Create stretch assignments that build new capabilities</li>
+                <li>Invest time in coaching and mentoring relationships</li>
+                <li>Connect people with learning opportunities (training, conferences, courses)</li>
+                <li>Prioritize character development alongside skill development</li>
+            </ul>
+            
+            <div class="activity-box">
+                <h3>Workshop Activity</h3>
+                <p>Have participants identify one team member and answer: What is their next level of growth? What experience, training, or support would accelerate that growth? What am I willing to invest (time, resources, risk) to help? Discuss the tension between short-term efficiency and long-term development.</p>
+            </div>
+            
+            <div class="discussion-box">
+                <h3>Discussion Prompts</h3>
+                <ul>
+                    <li>How do you make time for development when operational demands are high?</li>
+                    <li>What's the difference between developing people and simply being nice?</li>
+                    <li>When has a leader's investment in your growth changed your trajectory?</li>
+                </ul>
+            </div>
+
+            <textarea class="response-box" data-response-key="principle5" placeholder="Type your reflections or answers for Principle 5 here..."></textarea>
+            
+            <div class="gospel-section instructor-only">
+                <h3>Gospel Foundation</h3>
+                <p>Christ devoted years to teaching, mentoring, and preparing His disciples to continue His work. He focused on their eternal potential and patiently developed them into spiritual leaders.</p>
+                
+                <div class="scripture-ref">
+                    <strong>Scripture References:</strong>
+                    <ul>
+                        <li>Mark 3:14 (He ordained twelve, that they should be with Him)</li>
+                        <li>Luke 22:31–32 (strengthening Peter after his conversion)</li>
+                        <li>John 21:15–17 (“Feed my sheep” as a call to lead and develop)</li>
+                    </ul>
+                </div>
+                
+                <p><strong>Reflection for Instructors:</strong> How did Christ balance patience with people’s growth and urgency about His mission?</p>
+            </div>
+        </div>
+        
+        <!-- PRINCIPLE 6 -->
+        <div class="principle-card" id="principle6">
+            <h2>PRINCIPLE 6: LEAD WITH INTEGRITY AND CONSISTENCY</h2>
+            
+            <h3>Core Concept</h3>
+            <p>Trust is built when leaders consistently align their actions with their stated values. Integrity means doing what is right even when it is costly, and consistency means people can predict how you will respond in various situations.</p>
+            
+            <h3>Research Foundation</h3>
+            <p>Organizational trust research shows that perceived leader integrity is a strong predictor of follower trust. When leaders demonstrate consistent values-based behavior, team members feel safe, morale improves, and ethical culture strengthens.</p>
+            
+            <h3>Practical Applications</h3>
+            <ul>
+                <li>Clearly articulate your values and leadership principles</li>
+                <li>Make decisions using consistent criteria, not convenience or favoritism</li>
+                <li>Keep commitments, or renegotiate them early if circumstances change</li>
+                <li>Apply rules and standards fairly across all team members</li>
+                <li>Address ethical concerns directly, even when uncomfortable</li>
+            </ul>
+            
+            <div class="activity-box">
+                <h3>Workshop Activity</h3>
+                <p>Have participants identify their top three leadership values and one recent decision where those values were tested. Discuss whether they acted consistently and what made it difficult. Brainstorm systems that help leaders stay aligned under pressure.</p>
+            </div>
+            
+            <div class="discussion-box">
+                <h3>Discussion Prompts</h3>
+                <ul>
+                    <li>What erodes integrity in leadership more: big compromises or small ones?</li>
+                    <li>How do you balance consistency with flexibility and adaptation?</li>
+                    <li>When has a leader's integrity (or lack of it) shaped your trust in them?</li>
+                </ul>
+            </div>
+
+            <textarea class="response-box" data-response-key="principle6" placeholder="Type your reflections or answers for Principle 6 here..."></textarea>
+            
+            <div class="gospel-section instructor-only">
+                <h3>Gospel Foundation</h3>
+                <p>Christ lived with perfect integrity; His words and actions were completely aligned. Because He always did the Father’s will, His disciples could trust His example without reservation.</p>
+                
+                <div class="scripture-ref">
+                    <strong>Scripture References:</strong>
+                    <ul>
+                        <li>John 8:29 (always doing the things that please the Father)</li>
+                        <li>2 Nephi 31:16 (following the Son with full purpose of heart)</li>
+                        <li>3 Nephi 27:27 (being as Christ is)</li>
+                    </ul>
+                </div>
+                
+                <p><strong>Reflection for Instructors:</strong> What made Christ’s consistency so powerful in building trust and faith?</p>
+            </div>
+        </div>
+        
+        <!-- PRINCIPLE 7 -->
+        <div class="principle-card" id="principle7">
+            <h2>PRINCIPLE 7: PRIORITIZE PURPOSE OVER POSITION</h2>
+            
+            <h3>Core Concept</h3>
+            <p>The most meaningful leadership flows from a sense of mission and purpose rather than from title or authority. Leaders who connect daily work to something larger than themselves inspire deeper commitment and create cultures of meaning.</p>
+            
+            <h3>Research Foundation</h3>
+            <p>Purpose-driven leadership research shows that when people understand how their work contributes to something meaningful, engagement and resilience increase. Purpose-centered organizations often outperform those focused only on transactions.</p>
+            
+            <h3>Practical Applications</h3>
+            <ul>
+                <li>Regularly connect team work to the broader mission and impact</li>
+                <li>Help individuals see how their contributions matter to real people</li>
+                <li>Lead from conviction about what is right, not just what is expedient</li>
+                <li>Make decisions that serve long-term purpose even at short-term cost</li>
+                <li>Share stories that illustrate the “why” behind the work</li>
+            </ul>
+            
+            <div class="activity-box">
+                <h3>Workshop Activity</h3>
+                <p>Have participants write brief statements: “The purpose of my leadership is...” and “My team's work matters because...”. Share in small groups and identify common themes. Discuss how to weave purpose into regular communication and decision-making.</p>
+            </div>
+            
+            <div class="discussion-box">
+                <h3>Discussion Prompts</h3>
+                <ul>
+                    <li>How do you stay connected to purpose when tasks feel routine or tedious?</li>
+                    <li>What's the relationship between personal ambition and higher purpose?</li>
+                    <li>When has a leader's clear sense of purpose inspired you to go beyond what was required?</li>
+                </ul>
+            </div>
+
+            <textarea class="response-box" data-response-key="principle7" placeholder="Type your reflections or answers for Principle 7 here..."></textarea>
+            
+            <div class="gospel-section instructor-only">
+                <h3>Gospel Foundation</h3>
+                <p>Christ never sought earthly position or status. His leadership flowed entirely from His divine mission and His love for people, allowing Him to resist distractions and temptations that did not align with His purpose.</p>
+                
+                <div class="scripture-ref">
+                    <strong>Scripture References:</strong>
+                    <ul>
+                        <li>John 6:15 (withdrawing when people wanted to make Him a king)</li>
+                        <li>Luke 4:18–19 (declaring His anointed mission)</li>
+                        <li>Moses 1:39 (God’s work and glory to bring immortality and eternal life)</li>
+                    </ul>
+                </div>
+                
+                <p><strong>Reflection for Instructors:</strong> How did Christ’s clarity about His purpose help Him ignore status and stay focused on His mission?</p>
+            </div>
+        </div>
+
+        <!-- Save and Export buttons -->
+        <div style="text-align:center; margin: 20px 0 40px; display:flex; flex-wrap:wrap; justify-content:center; gap:15px;">
+            <button class="nav-pill" onclick="saveProgress()">Save Progress</button>
+            <button class="nav-pill" onclick="exportResponsesDoc()">Download My Responses (Word)</button>
+        </div>
+        
+        <footer>
+            <h3>Conclusion</h3>
+            <p>These seven principles form a leadership framework that reflects the character and ministry of Jesus Christ. As leaders live these principles, they foster cultures where people flourish, trust deepens, and meaningful work becomes a shared spiritual journey.</p>
+            
+            <div class="works-cited">
+                <h3>Works Cited</h3>
+                <p>Bass, B. M., &amp; Riggio, R. E. (2006). <em>Transformational leadership</em> (2nd ed.). Psychology Press.</p>
+                <p>Greenleaf, R. K. (1970). <em>The servant as leader</em>. Robert K. Greenleaf Publishing Center.</p>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        function showPrinciple(num, evt) {
+            const cards = document.querySelectorAll('.principle-card');
+            cards.forEach(card => card.classList.remove('active'));
+            
+            const pills = document.querySelectorAll('.nav-pills > .nav-pill');
+            pills.forEach(pill => pill.classList.remove('active'));
+            
+            document.getElementById('principle' + num).classList.add('active');
+            if (evt && evt.target) {
+                evt.target.classList.add('active');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function setMode(mode) {
+            const body = document.body;
+            const partBtn = document.getElementById('mode-participant');
+            const instBtn = document.getElementById('mode-instructor');
+            if (mode === 'instructor') {
+                body.classList.add('instructor-view');
+                instBtn.classList.add('active');
+                partBtn.classList.remove('active');
+            } else {
+                body.classList.remove('instructor-view');
+                partBtn.classList.add('active');
+                instBtn.classList.remove('active');
+            }
+        }
+
+        // Save responses to localStorage
+        function saveProgress() {
+            const responses = {};
+            const textareas = document.querySelectorAll('.response-box');
+            textareas.forEach(t => {
+                const key = t.getAttribute('data-response-key');
+                if (key) {
+                    responses[key] = t.value;
+                }
+            });
+            try {
+                localStorage.setItem('clt_responses', JSON.stringify(responses));
+                alert('Progress saved!');
+            } catch (e) {
+                alert('Unable to save progress in this browser.');
+            }
+        }
+
+        // Load responses from localStorage
+        function loadSavedResponses() {
+            try {
+                const stored = localStorage.getItem('clt_responses');
+                if (!stored) return;
+                const responses = JSON.parse(stored);
+                const textareas = document.querySelectorAll('.response-box');
+                textareas.forEach(t => {
+                    const key = t.getAttribute('data-response-key');
+                    if (key && responses[key] !== undefined) {
+                        t.value = responses[key];
+                    }
+                });
+            } catch (e) {
+                // ignore errors
+            }
+        }
+
+        // Export responses and questions to a Word-compatible .doc
+        function exportResponsesDoc() {
+            const docs = [];
+            const cards = document.querySelectorAll('.principle-card');
+            cards.forEach((card, idx) => {
+                const title = card.querySelector('h2')?.innerText || `Principle ${idx + 1}`;
+                const discussionItems = Array.from(card.querySelectorAll('.discussion-box li')).map(li => li.innerText.trim());
+                const response = card.querySelector('.response-box')?.value || '';
+                docs.push({ title, discussionItems, response });
+            });
+
+            let htmlContent = '<html><head><meta charset="UTF-8"></head><body>';
+            htmlContent += '<h1>Christlike Leadership Reflection Journal</h1>';
+            docs.forEach(d => {
+                htmlContent += `<h2>${d.title}</h2>`;
+                if (d.discussionItems.length) {
+                    htmlContent += '<h3>Reflection Questions</h3><ul>';
+                    d.discussionItems.forEach(q => {
+                        htmlContent += `<li>${q}</li>`;
+                    });
+                    htmlContent += '</ul>';
+                }
+                htmlContent += '<h3>Your Response</h3>';
+                const safeResponse = (d.response || '(no response entered)').replace(/\n/g, '<br>');
+                htmlContent += `<p>${safeResponse}</p>`;
+            });
+            htmlContent += '</body></html>';
+
+            // Use Word-compatible MIME type and BOM for better support [web:2][web:10]
+            const blob = new Blob(['\ufeff', htmlContent], { type: 'application/msword' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'christlike_leadership_reflections.doc';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Initialize saved data on load
+        document.addEventListener('DOMContentLoaded', loadSavedResponses);
+    </script>
+</body>
+</html>
